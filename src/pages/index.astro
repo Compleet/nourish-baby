@@ -1,0 +1,304 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AgeSlider from '../components/ui/AgeSlider';
+import RecipeCard from '../components/ui/RecipeCard';
+import FoodCard from '../components/food/FoodCard';
+import HangingPlant from '../components/decorative/HangingPlant';
+
+// Sample data - will be replaced with real data from logseq
+const sampleRecipes = [
+  {
+    title: "Bone Broth Rice Porridge",
+    description: "Nutrient-dense first food with deeply nourishing gelatin-rich broth and easy-to-digest rice.",
+    prepTime: "15 min + broth",
+    ageRange: "7+",
+    tags: ["bone broth", "rice", "iron-rich", "gut healing"]
+  },
+  {
+    title: "Egg Yolk with Butter",
+    description: "Traditional first food praised by Weston A. Price. Soft-cooked yolk with grass-fed butter.",
+    prepTime: "5 min",
+    ageRange: "7-8",
+    tags: ["egg yolk", "butter", "cholesterol", "brain food"]
+  },
+  {
+    title: "Liver Pâté Fingers",
+    description: "Mild chicken liver spread on sourdough toast fingers. The most nutrient-dense food for babies.",
+    prepTime: "20 min",
+    ageRange: "9+",
+    tags: ["liver", "sourdough", "vitamin A", "iron"]
+  },
+  {
+    title: "Fermented Vegetable Mash",
+    description: "Gently fermented carrots and beets for probiotics and enhanced mineral absorption.",
+    prepTime: "10 min + ferment",
+    ageRange: "9-10",
+    tags: ["fermented", "probiotics", "carrots", "beets"]
+  }
+];
+
+const sampleFoods = [
+  { name: "Avocado", italianName: "Avocado", category: "fat", ageStart: 7, nutrients: ["Vitamin E", "Folate", "Potassium"] },
+  { name: "Egg Yolk", italianName: "Tuorlo d'uovo", category: "protein", ageStart: 7, nutrients: ["Choline", "Vitamin D", "DHA"] },
+  { name: "Zucchini", italianName: "Zucchina", category: "vegetable", ageStart: 7, nutrients: ["Vitamin C", "Potassium", "Fiber"] },
+  { name: "Pear", italianName: "Pera", category: "fruit", ageStart: 7, nutrients: ["Fiber", "Vitamin C", "Copper"] },
+  { name: "Chicken Liver", italianName: "Fegatini di pollo", category: "protein", ageStart: 8, nutrients: ["Vitamin A", "Iron", "B12"] },
+  { name: "Lentils", italianName: "Lenticchie", category: "legume", ageStart: 9, nutrients: ["Iron", "Protein", "Folate"] },
+  { name: "Pecorino", italianName: "Pecorino", category: "dairy", ageStart: 10, nutrients: ["Calcium", "Protein", "Vitamin A"] },
+  { name: "Basil", italianName: "Basilico", category: "herb", ageStart: 8, nutrients: ["Vitamin K", "Iron", "Antioxidants"] },
+];
+---
+
+<Layout title="Nourish Baby - Traditional Wisdom for First Foods">
+  <!-- Hero Section -->
+  <header class="relative min-h-[85vh] flex flex-col items-center justify-center px-6 overflow-hidden">
+    <!-- Animated hanging plants -->
+    <div class="absolute top-0 left-4 w-32 h-48 opacity-25 hidden lg:block">
+      <HangingPlant client:load variant="left" />
+    </div>
+    <div class="absolute top-0 right-8 w-28 h-44 opacity-20 hidden lg:block">
+      <HangingPlant client:load variant="right" />
+    </div>
+
+    <!-- Main hero content -->
+    <div class="relative z-10 max-w-3xl mx-auto text-center">
+      <!-- Decorative botanical frame -->
+      <div class="absolute -inset-8 border-2 border-sage-200 rounded-[40px] opacity-30" style="border-radius: 47% 53% 52% 48% / 48% 47% 53% 52%;" />
+
+      <h1 class="text-display mb-6">
+        <span class="text-olive-950">Nourish</span>
+        <span class="text-terracotta-500">Baby</span>
+      </h1>
+
+      <p class="text-body-lg text-cream-700 max-w-xl mx-auto mb-8">
+        Traditional wisdom for your baby's first foods.
+        <em class="text-sage-600 font-serif">Nutrient-dense recipes</em> and
+        <em class="text-sage-600 font-serif">ancestral guidance</em> for ages 7-14 months.
+      </p>
+
+      <!-- Age Selector -->
+      <div class="mt-12 mb-8">
+        <p class="text-caption mb-4 uppercase tracking-wider">Select your baby's age</p>
+        <AgeSlider client:load initialAge={9} />
+      </div>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mt-10">
+        <a href="#recipes" class="btn-primary inline-flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+          Browse Recipes
+        </a>
+        <a href="#foods" class="btn-secondary inline-flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          Explore Foods
+        </a>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float">
+      <svg class="w-6 h-10 text-cream-400" fill="none" viewBox="0 0 24 40">
+        <rect x="1" y="1" width="22" height="38" rx="11" stroke="currentColor" stroke-width="2" />
+        <circle cx="12" cy="12" r="3" fill="currentColor" class="animate-pulse" />
+      </svg>
+    </div>
+  </header>
+
+  <!-- Three Layers Navigation -->
+  <nav class="sticky top-0 z-50 bg-paper/95 backdrop-blur-sm border-b border-cream-200">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="flex items-center justify-center gap-2">
+        <a href="#recipes" class="layer-tab active">
+          <span class="flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+            Quick Recipes
+          </span>
+        </a>
+        <a href="#foods" class="layer-tab">
+          <span class="flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+            </svg>
+            Food Explorer
+          </span>
+        </a>
+        <a href="#theory" class="layer-tab">
+          <span class="flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+            Deep Theory
+          </span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Layer 1: Quick Recipes -->
+  <section id="recipes" class="py-20 px-6">
+    <div class="max-w-6xl mx-auto">
+      <header class="text-center mb-12">
+        <h2 class="text-heading-1 mb-4">Nourishing Recipes</h2>
+        <p class="text-body-lg text-cream-700 max-w-2xl mx-auto">
+          Traditional, nutrient-dense recipes inspired by ancestral wisdom.
+          Each recipe is designed for easy preparation and maximum nourishment.
+        </p>
+      </header>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {sampleRecipes.map((recipe, i) => (
+          <div class={`stagger-${i + 1}`}>
+            <RecipeCard client:visible {...recipe} />
+          </div>
+        ))}
+      </div>
+
+      <div class="text-center mt-12">
+        <a href="/recipes" class="btn-secondary">
+          View All Recipes
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Layer 2: Food Explorer -->
+  <section id="foods" class="py-20 px-6 bg-sage-50/30">
+    <div class="max-w-6xl mx-auto">
+      <header class="text-center mb-12">
+        <h2 class="text-heading-1 mb-4">Food Explorer</h2>
+        <p class="text-body-lg text-cream-700 max-w-2xl mx-auto">
+          Discover which foods are perfect for your baby's age.
+          <span class="text-sage-600">Italian favorites</span> and traditional ingredients
+          organized by nutritional value and developmental stage.
+        </p>
+      </header>
+
+      <!-- Category filters -->
+      <div class="flex flex-wrap justify-center gap-2 mb-8">
+        {['All', 'Vegetables', 'Fruits', 'Proteins', 'Grains', 'Dairy', 'Legumes'].map((cat) => (
+          <button class={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+            cat === 'All'
+              ? 'bg-terracotta-500 text-white'
+              : 'bg-cream-100 text-cream-700 hover:bg-cream-200'
+          }`}>
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      <!-- Food grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {sampleFoods.map((food) => (
+          <FoodCard client:visible {...food} />
+        ))}
+      </div>
+
+      <div class="text-center mt-12">
+        <a href="/foods" class="btn-secondary">
+          Explore All Foods
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Layer 3: Deep Theory -->
+  <section id="theory" class="py-20 px-6">
+    <div class="max-w-4xl mx-auto">
+      <header class="text-center mb-12">
+        <h2 class="text-heading-1 mb-4">The Nourishing Traditions Approach</h2>
+        <p class="text-body-lg text-cream-700">
+          Understanding <em>why</em> traditional foods nourish better than modern alternatives.
+        </p>
+      </header>
+
+      <!-- Theory cards -->
+      <div class="space-y-6">
+        <article class="paper-aged p-8 rounded-2xl">
+          <h3 class="text-heading-2 mb-4 flex items-center gap-3">
+            <span class="w-10 h-10 rounded-full bg-sage-100 flex items-center justify-center text-sage-600">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </span>
+            Why Nutrient Density Matters
+          </h3>
+          <p class="text-cream-700 leading-relaxed">
+            Babies have tiny stomachs but enormous nutrient needs for brain development.
+            Traditional cultures understood this intuitively, offering liver, egg yolks,
+            and bone broths as first foods rather than iron-fortified cereals...
+          </p>
+          <a href="/theory/nutrient-density" class="inline-flex items-center gap-2 text-terracotta-600 font-medium mt-4 hover:text-terracotta-700">
+            Read more
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        </article>
+
+        <article class="paper-aged p-8 rounded-2xl">
+          <h3 class="text-heading-2 mb-4 flex items-center gap-3">
+            <span class="w-10 h-10 rounded-full bg-terracotta-100 flex items-center justify-center text-terracotta-600">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+              </svg>
+            </span>
+            Traditional Preparation Methods
+          </h3>
+          <p class="text-cream-700 leading-relaxed">
+            Soaking, sprouting, fermenting — these time-honored techniques unlock nutrients
+            and make foods more digestible for developing systems. Learn why your great-grandmother
+            soaked her oats overnight...
+          </p>
+          <a href="/theory/preparation" class="inline-flex items-center gap-2 text-terracotta-600 font-medium mt-4 hover:text-terracotta-700">
+            Read more
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        </article>
+
+        <article class="paper-aged p-8 rounded-2xl">
+          <h3 class="text-heading-2 mb-4 flex items-center gap-3">
+            <span class="w-10 h-10 rounded-full bg-cream-200 flex items-center justify-center text-cream-700">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </span>
+            The Italian Tradition
+          </h3>
+          <p class="text-cream-700 leading-relaxed">
+            Italian weaning traditions emphasize seasonal, local ingredients prepared simply.
+            From passata di verdure to brodo di carne, discover why Mediterranean babies
+            thrive on these time-tested foods...
+          </p>
+          <a href="/theory/italian-tradition" class="inline-flex items-center gap-2 text-terracotta-600 font-medium mt-4 hover:text-terracotta-700">
+            Read more
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-12 px-6 border-t border-cream-200">
+    <div class="max-w-4xl mx-auto text-center">
+      <p class="text-cream-600 text-sm">
+        Built with love for nourishing the next generation.
+        <br />
+        Inspired by the wisdom of Sally Fallon's <em>Nourishing Traditions</em>.
+      </p>
+      <p class="text-cream-500 text-xs mt-4">
+        This site provides general information and is not a substitute for professional medical advice.
+      </p>
+    </div>
+  </footer>
+</Layout>

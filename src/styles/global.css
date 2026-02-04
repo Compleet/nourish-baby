@@ -1,0 +1,404 @@
+@import "tailwindcss";
+@import "@fontsource/spectral/400.css";
+@import "@fontsource/spectral/500.css";
+@import "@fontsource/spectral/600.css";
+@import "@fontsource/spectral/400-italic.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   NOURISH BABY - Design System
+   Aesthetic: Terracotta botanical library meets Mediterranean kitchen
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@theme {
+  /* ─────────────────────────────────────────────────────────────────────────
+     COLOR PALETTE - Terracotta & Botanical
+     ───────────────────────────────────────────────────────────────────────── */
+
+  /* Primary: Warm terracotta tones */
+  --color-terracotta-50: #fdf6f3;
+  --color-terracotta-100: #faeae4;
+  --color-terracotta-200: #f5d4c8;
+  --color-terracotta-300: #edb8a4;
+  --color-terracotta-400: #e2937a;
+  --color-terracotta-500: #d4714f;
+  --color-terracotta-600: #c45a3d;
+  --color-terracotta-700: #a34832;
+  --color-terracotta-800: #863d2d;
+  --color-terracotta-900: #6e3529;
+  --color-terracotta-950: #3b1912;
+
+  /* Secondary: Sage green botanical */
+  --color-sage-50: #f6f7f4;
+  --color-sage-100: #e9ebe3;
+  --color-sage-200: #d4d9c9;
+  --color-sage-300: #b6bfa6;
+  --color-sage-400: #97a382;
+  --color-sage-500: #7a8965;
+  --color-sage-600: #5f6d4e;
+  --color-sage-700: #4b5640;
+  --color-sage-800: #3e4636;
+  --color-sage-900: #353c30;
+  --color-sage-950: #1b1f18;
+
+  /* Neutral: Warm cream to espresso */
+  --color-cream-50: #fefdfb;
+  --color-cream-100: #fcf9f3;
+  --color-cream-200: #f7f1e6;
+  --color-cream-300: #f0e5d3;
+  --color-cream-400: #e6d4b8;
+  --color-cream-500: #d9c09a;
+  --color-cream-600: #c9a776;
+  --color-cream-700: #b58d56;
+  --color-cream-800: #96734a;
+  --color-cream-900: #7a5f40;
+  --color-cream-950: #423221;
+
+  /* Accent: Deep olive for text and borders */
+  --color-olive-800: #3d4a35;
+  --color-olive-900: #2d3628;
+  --color-olive-950: #1a1f16;
+
+  /* Paper texture colors */
+  --color-paper: #faf8f3;
+  --color-paper-aged: #f5f0e4;
+  --color-paper-warm: #f8f4eb;
+
+  /* ─────────────────────────────────────────────────────────────────────────
+     TYPOGRAPHY
+     ───────────────────────────────────────────────────────────────────────── */
+  --font-serif: "Spectral", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+
+  /* ─────────────────────────────────────────────────────────────────────────
+     SHADOWS - Soft, layered depth
+     ───────────────────────────────────────────────────────────────────────── */
+  --shadow-soft: 0 2px 8px -2px rgba(107, 78, 58, 0.08),
+                 0 4px 16px -4px rgba(107, 78, 58, 0.12);
+  --shadow-card: 0 4px 12px -4px rgba(107, 78, 58, 0.1),
+                 0 8px 24px -8px rgba(107, 78, 58, 0.15);
+  --shadow-elevated: 0 8px 24px -8px rgba(107, 78, 58, 0.12),
+                     0 16px 48px -16px rgba(107, 78, 58, 0.2);
+  --shadow-botanical: 0 4px 16px -4px rgba(75, 86, 64, 0.15);
+
+  /* ─────────────────────────────────────────────────────────────────────────
+     BORDER RADIUS - Organic, soft edges
+     ───────────────────────────────────────────────────────────────────────── */
+  --radius-organic-sm: 8px 12px 8px 10px;
+  --radius-organic-md: 12px 16px 14px 18px;
+  --radius-organic-lg: 20px 24px 22px 26px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BASE STYLES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-paper);
+  color: var(--color-olive-900);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Paper texture overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  z-index: 9999;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TYPOGRAPHY STYLES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  color: var(--color-olive-950);
+  line-height: 1.25;
+}
+
+.text-display {
+  font-family: var(--font-serif);
+  font-size: 3.5rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.text-heading-1 {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+
+.text-heading-2 {
+  font-family: var(--font-serif);
+  font-size: 1.875rem;
+  font-weight: 500;
+}
+
+.text-body-lg {
+  font-size: 1.125rem;
+  line-height: 1.8;
+}
+
+.text-caption {
+  font-size: 0.875rem;
+  color: var(--color-cream-700);
+  letter-spacing: 0.01em;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CARD STYLES - Recipe cards, food cards
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.card-recipe {
+  background: linear-gradient(
+    145deg,
+    var(--color-cream-50) 0%,
+    var(--color-paper-aged) 100%
+  );
+  border: 1px solid var(--color-cream-300);
+  border-radius: var(--radius-organic-md);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-recipe:hover {
+  transform: translateY(-4px) rotate(0.5deg);
+  box-shadow: var(--shadow-elevated);
+}
+
+.card-food {
+  background: var(--color-paper-warm);
+  border: 1px solid var(--color-sage-200);
+  border-radius: 16px;
+  box-shadow: var(--shadow-soft);
+  transition: all 0.25s ease;
+}
+
+.card-food:hover {
+  border-color: var(--color-sage-400);
+  box-shadow: var(--shadow-botanical);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DECORATIVE ELEMENTS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.botanical-border {
+  border: 2px solid var(--color-sage-300);
+  border-image: repeating-linear-gradient(
+    90deg,
+    var(--color-sage-300) 0px,
+    var(--color-sage-300) 8px,
+    transparent 8px,
+    transparent 12px
+  ) 1;
+}
+
+.terracotta-accent {
+  background: linear-gradient(
+    135deg,
+    var(--color-terracotta-400) 0%,
+    var(--color-terracotta-500) 50%,
+    var(--color-terracotta-600) 100%
+  );
+}
+
+/* Aged paper effect for theory sections */
+.paper-aged {
+  background: var(--color-paper-aged);
+  box-shadow:
+    inset 0 0 60px rgba(139, 109, 76, 0.05),
+    var(--shadow-soft);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   INTERACTIVE STATES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.btn-primary {
+  background: var(--color-terracotta-500);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px -2px rgba(212, 113, 79, 0.4);
+}
+
+.btn-primary:hover {
+  background: var(--color-terracotta-600);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px -2px rgba(212, 113, 79, 0.5);
+}
+
+.btn-secondary {
+  background: var(--color-sage-100);
+  color: var(--color-sage-800);
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 500;
+  border: 1px solid var(--color-sage-300);
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--color-sage-200);
+  border-color: var(--color-sage-400);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   AGE INDICATOR BADGES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.age-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  font-family: var(--font-sans);
+}
+
+.age-badge-7-8 {
+  background: var(--color-sage-100);
+  color: var(--color-sage-700);
+  border: 1px solid var(--color-sage-300);
+}
+
+.age-badge-9-10 {
+  background: var(--color-cream-200);
+  color: var(--color-cream-800);
+  border: 1px solid var(--color-cream-400);
+}
+
+.age-badge-11-12 {
+  background: var(--color-terracotta-100);
+  color: var(--color-terracotta-700);
+  border: 1px solid var(--color-terracotta-300);
+}
+
+.age-badge-13-14 {
+  background: var(--color-terracotta-200);
+  color: var(--color-terracotta-800);
+  border: 1px solid var(--color-terracotta-400);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   LAYER NAVIGATION
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.layer-tab {
+  position: relative;
+  padding: 1rem 1.5rem;
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  color: var(--color-cream-700);
+  transition: all 0.25s ease;
+}
+
+.layer-tab::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 3px;
+  background: var(--color-terracotta-400);
+  border-radius: 3px 3px 0 0;
+  transition: all 0.25s ease;
+  transform: translateX(-50%);
+}
+
+.layer-tab:hover,
+.layer-tab.active {
+  color: var(--color-olive-900);
+}
+
+.layer-tab.active::after {
+  width: 60%;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SCROLLBAR STYLING
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-cream-100);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-cream-400);
+  border-radius: 5px;
+  border: 2px solid var(--color-cream-100);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-cream-500);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ANIMATION UTILITIES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes sway {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+
+@keyframes bloom {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.02); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-sway {
+  animation: sway 6s ease-in-out infinite;
+}
+
+.animate-bloom {
+  animation: bloom 0.4s ease-out forwards;
+}
+
+/* Staggered animation delays for lists */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }

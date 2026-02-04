@@ -1,0 +1,86 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Traditional wisdom for your baby's first foods. Nourishing recipes and food guides for ages 7-14 months." } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+  </head>
+  <body class="min-h-screen">
+    <!-- Decorative botanical elements - fixed positioning -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
+      <!-- Top left hanging plant -->
+      <svg class="absolute -top-4 -left-8 w-48 h-64 opacity-20 animate-sway" viewBox="0 0 200 300" fill="none">
+        <path d="M100 0 L100 80" stroke="var(--color-sage-400)" stroke-width="3"/>
+        <ellipse cx="100" cy="95" rx="25" ry="15" fill="var(--color-terracotta-300)"/>
+        <!-- Trailing vines -->
+        <path d="M85 110 Q60 160 70 220 Q75 260 55 300" stroke="var(--color-sage-400)" stroke-width="2" fill="none"/>
+        <path d="M100 110 Q90 170 100 230 Q105 270 95 300" stroke="var(--color-sage-500)" stroke-width="2" fill="none"/>
+        <path d="M115 110 Q140 150 130 200 Q125 250 145 300" stroke="var(--color-sage-400)" stroke-width="2" fill="none"/>
+        <!-- Leaves -->
+        <ellipse cx="65" cy="180" rx="12" ry="8" fill="var(--color-sage-300)" transform="rotate(-20 65 180)"/>
+        <ellipse cx="75" cy="240" rx="10" ry="6" fill="var(--color-sage-400)" transform="rotate(15 75 240)"/>
+        <ellipse cx="130" cy="160" rx="14" ry="9" fill="var(--color-sage-300)" transform="rotate(25 130 160)"/>
+        <ellipse cx="125" cy="220" rx="11" ry="7" fill="var(--color-sage-400)" transform="rotate(-10 125 220)"/>
+        <ellipse cx="100" cy="200" rx="10" ry="6" fill="var(--color-sage-500)" transform="rotate(5 100 200)"/>
+      </svg>
+
+      <!-- Top right hanging plant -->
+      <svg class="absolute -top-4 right-12 w-40 h-56 opacity-15" style="animation: sway 7s ease-in-out infinite reverse;" viewBox="0 0 160 240" fill="none">
+        <path d="M80 0 L80 60" stroke="var(--color-sage-400)" stroke-width="2"/>
+        <ellipse cx="80" cy="72" rx="20" ry="12" fill="var(--color-terracotta-400)"/>
+        <path d="M70 84 Q50 130 60 180 Q65 210 50 240" stroke="var(--color-sage-500)" stroke-width="1.5" fill="none"/>
+        <path d="M90 84 Q110 120 100 170 Q95 200 110 240" stroke="var(--color-sage-400)" stroke-width="1.5" fill="none"/>
+        <ellipse cx="55" cy="150" rx="9" ry="5" fill="var(--color-sage-400)" transform="rotate(-25 55 150)"/>
+        <ellipse cx="105" cy="140" rx="10" ry="6" fill="var(--color-sage-300)" transform="rotate(20 105 140)"/>
+        <ellipse cx="60" cy="200" rx="8" ry="5" fill="var(--color-sage-500)" transform="rotate(10 60 200)"/>
+      </svg>
+
+      <!-- Bottom right corner botanical -->
+      <svg class="absolute bottom-0 right-0 w-72 h-48 opacity-10" viewBox="0 0 300 200" fill="none">
+        <path d="M300 200 Q240 180 200 120 Q180 80 220 40" stroke="var(--color-sage-300)" stroke-width="3" fill="none"/>
+        <path d="M300 180 Q260 160 230 100 Q210 60 250 20" stroke="var(--color-sage-400)" stroke-width="2" fill="none"/>
+        <ellipse cx="210" cy="90" rx="18" ry="12" fill="var(--color-sage-200)" transform="rotate(-30 210 90)"/>
+        <ellipse cx="240" cy="60" rx="15" ry="10" fill="var(--color-sage-300)" transform="rotate(-45 240 60)"/>
+        <ellipse cx="230" cy="130" rx="20" ry="13" fill="var(--color-sage-200)" transform="rotate(20 230 130)"/>
+      </svg>
+
+      <!-- Subtle terracotta pot bottom left -->
+      <svg class="absolute bottom-8 left-8 w-24 h-32 opacity-15" viewBox="0 0 100 140" fill="none">
+        <path d="M20 60 L10 130 L90 130 L80 60 Z" fill="var(--color-terracotta-300)"/>
+        <rect x="15" y="50" width="70" height="15" rx="3" fill="var(--color-terracotta-400)"/>
+        <ellipse cx="50" cy="45" rx="8" ry="20" fill="var(--color-sage-400)" transform="rotate(-10 50 45)"/>
+        <ellipse cx="60" cy="35" rx="6" ry="15" fill="var(--color-sage-300)" transform="rotate(15 60 35)"/>
+        <ellipse cx="40" cy="38" rx="7" ry="18" fill="var(--color-sage-500)" transform="rotate(-5 40 38)"/>
+      </svg>
+    </div>
+
+    <!-- Main content -->
+    <div class="relative z-10">
+      <slot />
+    </div>
+
+    <!-- Decorative grain overlay for organic feel -->
+    <div class="fixed inset-0 pointer-events-none z-20 opacity-[0.015]"
+         style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%270 0 256 256%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27noise%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.7%27 numOctaves=%273%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23noise)%27/%3E%3C/svg%3E');">
+    </div>
+  </body>
+</html>
